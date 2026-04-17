@@ -1,13 +1,8 @@
-# ============================================
-# NORTHSTAR ANALYSIS - FULLY FIXED CODE
-# ============================================
-
 # Create folder for charts
 dir.create("northstar_charts", showWarnings = FALSE)
 
-# ============================================
-# READ YOUR CSV FILES
-# ============================================
+# READ CSV FILES
+
 
 # Main analysis files
 zone_data <- read.csv("C:/Users/ASUS/Desktop/ANC database/RUN CSV/Zone Performance Analysis .csv")
@@ -16,9 +11,9 @@ driver_data <- read.csv("C:/Users/ASUS/Desktop/ANC database/RUN CSV/Driver Perfo
 vehicle_data <- read.csv("C:/Users/ASUS/Desktop/ANC database/RUN CSV/Vehicle Battery Health vs Delivery Problems .csv")
 hub_data <- read.csv("C:/Users/ASUS/Desktop/ANC database/RUN CSV/Hub Performance Analysis .csv")
 
-# ============================================
+
 # CHECK IF FILES LOADED
-# ============================================
+
 
 cat("✅ Zone data:", nrow(zone_data), "rows\n")
 cat("✅ Complaint data:", nrow(complaint_data), "rows\n")
@@ -26,16 +21,17 @@ cat("✅ Driver data:", nrow(driver_data), "rows\n")
 cat("✅ Vehicle data:", nrow(vehicle_data), "rows\n")
 cat("✅ Hub data:", nrow(hub_data), "rows\n")
 
-# ============================================
-# VIEW WHAT'S IN YOUR VEHICLE DATA
-# ============================================
+
+
+# VIEW WHAT'S IN VEHICLE DATA
+
 
 cat("\n🔍 VEHICLE DATA CONTENTS:\n")
 print(vehicle_data)
 
-# ============================================
+
 # CHART 1: Zone Failure Rates
-# ============================================
+
 
 png("northstar_charts/1_zone_failure_rates.png", width = 800, height = 500)
 zones <- zone_data[,1]
@@ -48,9 +44,9 @@ text(1:length(failure_rates), failure_rates + 3, paste0(failure_rates, "%"), cex
 dev.off()
 cat("✅ Chart 1 saved\n")
 
-# ============================================
+
 # CHART 2: Complaint Types
-# ============================================
+
 
 png("northstar_charts/2_complaint_types.png", width = 800, height = 500)
 complaint_types <- complaint_data[,1]
@@ -63,9 +59,9 @@ text(1:length(complaint_counts), complaint_counts + 10, complaint_counts, cex = 
 dev.off()
 cat("✅ Chart 2 saved\n")
 
-# ============================================
+
 # CHART 3: Driver Performance
-# ============================================
+
 
 png("northstar_charts/3_driver_experience.png", width = 700, height = 500)
 driver_exp <- driver_data[,1]
@@ -78,9 +74,9 @@ text(1:length(on_time_rates), on_time_rates + 3, paste0(on_time_rates, "%"), cex
 dev.off()
 cat("✅ Chart 3 saved\n")
 
-# ============================================
-# CHART 4: Vehicle Battery (FIXED VERSION)
-# ============================================
+
+# CHART 4: Vehicle Battery 
+
 
 # First, check if vehicle data exists and has values
 if(nrow(vehicle_data) > 0 && ncol(vehicle_data) >= 3) {
@@ -125,9 +121,8 @@ if(nrow(vehicle_data) > 0 && ncol(vehicle_data) >= 3) {
   cat("⚠️ Chart 4 skipped: Vehicle data file has issues\n")
 }
 
-# ============================================
 # CHART 5: Hub Performance
-# ============================================
+
 
 png("northstar_charts/5_hub_performance.png", width = 1000, height = 500)
 hub_names <- hub_data[,1]
@@ -141,9 +136,7 @@ text(1:length(hub_rates), hub_rates + 3, paste0(hub_rates, "%"), cex = 0.9)
 dev.off()
 cat("✅ Chart 5 saved\n")
 
-# ============================================
-# DONE!
-# ============================================
+
 
 cat("\n")
 cat("========================================\n")
